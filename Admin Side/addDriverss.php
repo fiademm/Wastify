@@ -18,7 +18,7 @@
         <script src="js/uikit-icons.min.js" ></script>
     </head>
     <body>
-        <div uk-sticky class="uk-navbar-container tm-navbar-container uk-active">
+    <div uk-sticky class="uk-navbar-container tm-navbar-container uk-active">
             <div class="uk-container uk-container-expand">
                 <nav uk-navbar>
                     <div class="uk-navbar-left">
@@ -32,10 +32,10 @@
                             <li class="uk-active">
                                 <a href="#">Menu &nbsp;<span class="ion-ios-arrow-down"></span></a>
                                 <div uk-dropdown="pos: bottom-right; mode: click; offset: -17;">
-                                    <ul class="uk-nav uk-navbar-dropdown-nav">
-                                        <li><a href="#">Edit Profile</a></li>
-                                        <li><a href="login.html">Logout</a></li>
-                                    </ul>
+                                   <ul class="uk-nav uk-navbar-dropdown-nav">
+                                       <li><a href="#">Edit Profile</a></li>
+                                       <li><a href="login.html">Logout</a></li>
+                                   </ul>
                                 </div>
                             </li>
                         </ul>
@@ -58,110 +58,78 @@
 
                 <li class="uk-nav-header">
                 </li>
-                    <li><a href="manageDrivers.html">Manage Drivers</a></li>
-                    <li><a href="manageClients.html">Manage Users</a></li>
+                    <li><a href="manageDrivers.php">Add Drivers</a></li>
+                    <li><a href="manageClients.php">Add Users</a></li>
+                    <li><a href="addDriverss.php">View Drivers</a></li>
+                    <li><a href="addClientss.php">View Clients</a></li>
                     <li class="uk-nav-header">
                 </li>
             </ul>
         </div>
-
         <div class="content-padder content-background">
             <div class="uk-section-small uk-section-default header">
                 <div class="uk-container uk-container-large">
                     <h1><span class="ion-speedometer"></span> Dashboard</h1>
                     <p>
-                        Welcome back, Lord Adei
+                        Welcome back, Lord Ohene
                     </p>
                     <ul class="uk-breadcrumb">
                         <li><a href="index.html">Home</a></li>
-                        <li><span href="">Dashboard</span></li>
+                        <li><span href="">Scheduler</span></li>
                     </ul>
                 </div>
             </div>
             <div class="uk-section-small">
                 <div class="uk-container uk-container-large">
                     <div uk-grid class="uk-child-width-1-1@s uk-child-width-1-1@l">
-                        <div>
-                            <div class="uk-card uk-card-default">
-                                <div class="uk-card-header">
-                                    Details of Drivers
-                                </div>
-                                <div class="uk-card-body">
-                                    <table class="uk-table uk-table-striped">
+                        <div class="container mt-2">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="page-header">
+                                        <h2>Drivers</h2>
+                                    </div>
+                    
+                                    <table class="table">
                                         <thead>
                                             <tr>
-                                                <th>Driver Id</th>
-                                                <th>Username</th>
-                                                <th>Fullname</th>
-                                                <th>Email Address</th>
-                                                <th>Phone Number</th>
-                                                <th>Car Number</th>
+                                                <th scope="col">Driver Id</th>
+                                                <th scope="col">Fullname</th>
+                                                <th scope="col">Username</th>
+                                                <th scope="col">Email</th>
+                                                <th scope="col">Phone number</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <?php include 'fetchDrivers.php'; ?>
+                                    
+                                            <?php if ($result->num_rows > 0): ?>
+                    
+                                            <?php while($array=mysqli_fetch_row($result)): ?>
+                    
                                             <tr>
-                                                <td>0001</td>
-                                                <td>owususam</td>
-                                                <td>Samuel Owusu</td>
-                                                <td>Samuel Owusu</td>
-                                                <td>Samuel Owusu</td>
-                                                <td>Samuel Owusu</td>
+                                                <th scope="row"><?php echo $array[0];?></th>
+                                                <td><?php echo $array[1];?></td>
+                                                <td><?php echo $array[2];?></td>
+                                                <td><?php echo $array[3];?></td>
+                                                <td><?php echo $array[4];?></td>
                                             </tr>
+                    
+                                            <?php endwhile; ?>
+                    
+                                            <?php else: ?>
                                             <tr>
-                                                <td>0002</td>
-                                                <td>gyanohene</td>
-                                                <td>Ohene Gyan</td>
-                                                <td>Table Data</td>
-                                                <td>Table Data</td>
-                                                <td>Table Data</td>
+                                                <td colspan="3" rowspan="1" headers="">No Data Found</td>
                                             </tr>
-                                            <tr>
-                                                <td>0003</td>
-                                                <td>danielOduro</td>
-                                                <td>Table Data</td>
-                                                <td>Table Data</td>
-                                                <td>Table Data</td>
-                                                <td>Table Data</td>
-                                            </tr> 
+                                            <?php endif; ?>
+                    
+                                            <?php mysqli_free_result($result); ?>
+                    
                                         </tbody>
                                     </table>
-                                    <a href="#" class="buttons">+ Add New Driver Here</a>
-                                        <div class="row hide">
-                                            <form class="col s12">
-                                                <div class="row">
-                                                    <div class="input-field col s4">
-                                                        <label for="name">Driver ID</label>
-                                                        <input id="name" type="text">
-                                                    </div>
-                                                    <div class="input-field col s4">
-                                                        <label for="name">Username</label>
-                                                        <input id="name" type="text">
-                                                    </div>
-                                                    <div class="input-field col s4">
-                                                        <label for="name">Fullname</label>
-                                                        <input id="name" type="text">
-                                                    </div>
-                                                    <div class="input-field col s4">
-                                                        <label for="name">Email Address</label>
-                                                        <input id="name" type="text">
-                                                    </div>
-                                                    <div class="input-field col s4">
-                                                        <label for="name">Phone Number</label>
-                                                        <input id="name" type="text">
-                                                    </div>
-                                                    <div class="input-field col s4">
-                                                        <label for="name">Car Number</label>
-                                                        <input id="name" type="text">
-                                                    </div>
-                                                </div>
-
-                                            </form>
-                                            <button class=" add-mountain z-depth-1">Add New Driver</button>
-                                    </div>
-                                </div>		
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </div>   
                 </div>
             </div>
 
